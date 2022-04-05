@@ -6,9 +6,14 @@ import net.yukitteru.calculator.util.ExpressionParser;
 import net.yukitteru.calculator.util.InfixToPostfixConverter;
 import net.yukitteru.calculator.util.ReversePolishNotation;
 
+import java.util.Scanner;
+
 public class Application {
     public static void main(String[] args) throws IllegalExpressionException {
-        String infixExpression = "V * V";
+        //long start = System.currentTimeMillis();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a mathematical expression: ");
+        String infixExpression = scanner.nextLine();
 
         ExpressionParser.isValidExpr(infixExpression);
 
@@ -18,7 +23,8 @@ public class Application {
 
         var calculator = new Calculator(infixToPostfixConverter, reversePolishNotation);
         Object result = calculator.calculate(infixExpression);
-        System.out.println(result);
+        System.out.println("Your result is: " + result);
+        //System.out.println(System.currentTimeMillis() - start + " ms");
 
     }
 
