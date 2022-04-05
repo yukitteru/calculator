@@ -14,13 +14,11 @@ public class Calculator {
 
     public Object calculate(String infixExpression) throws IllegalExpressionException {
         String postfix = infixToPostfixConverter.convert(infixExpression);
-        Integer eval = reversePolishNotation.eval(postfix.split(" "));
-
         try {
             if (postfix.chars().anyMatch(Character::isDigit)) {
                 return reversePolishNotation.eval(postfix.split(" "));
             } else {
-                return NumerationConverter.arabicToRoman(eval);
+                return NumerationConverter.arabicToRoman(reversePolishNotation.eval(postfix.split(" ")));
             }
         } catch (Exception e) {
             throw new IllegalExpressionException("The application only works with integers");

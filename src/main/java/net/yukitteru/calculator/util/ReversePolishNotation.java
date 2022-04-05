@@ -40,7 +40,7 @@ public class ReversePolishNotation {
                     try {
                         throw new IllegalExpressionException("The application only works with integers from 1 to 10");
                     } catch (IllegalExpressionException e) {
-
+                        e.printStackTrace();
                     }
                 else {
                     operands.push(new IntegerOperand(token));
