@@ -2,6 +2,7 @@ package net.yukitteru.calculator.calculator;
 
 import lombok.RequiredArgsConstructor;
 import net.yukitteru.calculator.exception.IllegalExpressionException;
+import net.yukitteru.calculator.exception.IncorrectResultValueException;
 import net.yukitteru.calculator.util.InfixToPostfixConverter;
 import net.yukitteru.calculator.util.NumerationConverter;
 import net.yukitteru.calculator.util.ReversePolishNotation;
