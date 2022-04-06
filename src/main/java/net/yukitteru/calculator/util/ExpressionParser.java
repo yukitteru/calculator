@@ -16,13 +16,10 @@ public class ExpressionParser {
 
 
     public static boolean isValidExpr(String expr) {
-        if (expr.chars().filter(c -> c != '+' && c != '-' && c != '*' && c != '/').allMatch(Character::isDigit)) {
+        if (expr.chars().filter(c -> c != '+' && c != '-' && c != '*' && c != '/' && c != ' ').allMatch(Character::isDigit)) {
             return true;
         }
-        if (expr.chars().filter(c -> c != '+' && c != '-' && c != '*' && c != '/').allMatch(Character::isAlphabetic)) {
-            return true;
-        }
-        return false;
+        return expr.chars().filter(c -> c != '+' && c != '-' && c != '*' && c != '/' && c != ' ').allMatch(Character::isAlphabetic);
     }
 
 
