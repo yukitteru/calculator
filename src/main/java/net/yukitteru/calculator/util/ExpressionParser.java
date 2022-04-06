@@ -1,7 +1,5 @@
 package net.yukitteru.calculator.util;
 
-import net.yukitteru.calculator.exception.IllegalExpressionException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -17,15 +15,15 @@ public class ExpressionParser {
     );
 
 
-    public static boolean isValidExpr(String expr) throws IllegalExpressionException {
-        if (expr.chars().filter(c -> c != '+' && c != '-' && c != '*' && c != '/').allMatch(Character::isDigit)) {
+    public static boolean isValidExpr(String expr) {
+        if (expr.chars()
+                .filter(c -> c != '+' && c != '-' && c != '*' && c != '/' && c != ' ' && c != ')' && c != '(')
+                .allMatch(Character::isDigit)) {
             return true;
         }
-        if (expr.chars().filter(c -> c != '+' && c != '-' && c != '*' && c != '/').allMatch(Character::isAlphabetic)) {
-            return true;
-        } else {
-            throw new IllegalExpressionException("Impossible to work with Roman and Arabic numbers at the same time");
-        }
+        return expr.chars()
+                .filter(c -> c != '+' && c != '-' && c != '*' && c != '/' && c != ' ' && c != ')' && c != '(')
+                .allMatch(Character::isAlphabetic);
     }
 
 
