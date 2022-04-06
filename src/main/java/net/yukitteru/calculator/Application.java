@@ -10,21 +10,19 @@ import java.util.Scanner;
 
 public class Application {
     public static void main(String[] args) throws IllegalExpressionException {
-        //long start = System.currentTimeMillis();
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter a mathematical expression: ");
+        System.out.print("Enter a mathematical expression:");
         String infixExpression = scanner.nextLine();
 
-        ExpressionParser.isValidExpr(infixExpression);
+        if (ExpressionParser.isValidExpr(infixExpression)) {
+            var expressionParser = new ExpressionParser();
+            var infixToPostfixConverter = new InfixToPostfixConverter(expressionParser);
+            var reversePolishNotation = new ReversePolishNotation();
 
-        var expressionParser = new ExpressionParser();
-        var infixToPostfixConverter = new InfixToPostfixConverter(expressionParser);
-        var reversePolishNotation = new ReversePolishNotation();
-
-        var calculator = new Calculator(infixToPostfixConverter, reversePolishNotation);
-        Object result = calculator.calculate(infixExpression);
-        System.out.println("Your result is: " + result);
-        //System.out.println(System.currentTimeMillis() - start + " ms");
+            var calculator = new Calculator(infixToPostfixConverter, reversePolishNotation);
+            Object result = calculator.calculate(infixExpression);
+            System.out.println("Your result is: " + result);
+        } else throw new IllegalExpressionException("The based expression is not valid. Try again");
 
     }
 
