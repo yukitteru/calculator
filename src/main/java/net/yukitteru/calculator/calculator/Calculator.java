@@ -23,7 +23,7 @@ public class Calculator {
                 return NumerationConverter.arabicToRoman(eval);
             }
         } catch (Exception e) {
-            throw new IllegalExpressionException("The application only works with integers");
+            throw new IllegalExpressionException("The application only works with integers from 0 to 10");
         }
 
     }
