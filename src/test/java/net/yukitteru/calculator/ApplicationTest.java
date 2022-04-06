@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 
 public class ApplicationTest {
     @Test
-    public void itShouldEvaluateTheGivenExpressionWithArabicNumbersAdditionalOperationAndReturnTheResult() throws IllegalExpressionException {
+    public void itShouldEvaluateTheGivenExpressionWithArabicNumbersAdditionalOperationAndReturnTheResult() throws IllegalExpressionException, IncorrectResultValueException {
         String infixExpression = "5 + 8";
         var expressionParser  = new ExpressionParser();
         var infixToPostfixConverter = new InfixToPostfixConverter(expressionParser);
@@ -23,7 +23,7 @@ public class ApplicationTest {
     }
 
     @Test
-    public void itShouldEvaluateTheGivenExpressionWithArabicNumbersSubtractionOperationAndReturnTheResult() throws IllegalExpressionException {
+    public void itShouldEvaluateTheGivenExpressionWithArabicNumbersSubtractionOperationAndReturnTheResult() throws IllegalExpressionException, IncorrectResultValueException {
         String infixExpression = "10 - 6";
         var expressionParser  = new ExpressionParser();
         var infixToPostfixConverter = new InfixToPostfixConverter(expressionParser);
@@ -35,7 +35,7 @@ public class ApplicationTest {
     }
 
     @Test
-    public void itShouldEvaluateTheGivenExpressionWithArabicNumbersMultiplicationOperationAndReturnTheResult() throws IllegalExpressionException {
+    public void itShouldEvaluateTheGivenExpressionWithArabicNumbersMultiplicationOperationAndReturnTheResult() throws IllegalExpressionException, IncorrectResultValueException {
         String infixExpression = "9 * 7";
         var expressionParser  = new ExpressionParser();
         var infixToPostfixConverter = new InfixToPostfixConverter(expressionParser);
@@ -47,7 +47,7 @@ public class ApplicationTest {
     }
 
     @Test
-    public void itShouldEvaluateTheGivenExpressionWithArabicNumbersDivisionOperationAndReturnTheResult() throws IllegalExpressionException {
+    public void itShouldEvaluateTheGivenExpressionWithArabicNumbersDivisionOperationAndReturnTheResult() throws IllegalExpressionException, IncorrectResultValueException {
         String infixExpression = "8 / 4";
         var expressionParser  = new ExpressionParser();
         var infixToPostfixConverter = new InfixToPostfixConverter(expressionParser);
@@ -59,7 +59,7 @@ public class ApplicationTest {
     }
 
     @Test
-    public void itShouldEvaluateTheGivenExpressionWithRomeNumbersPlusOperationAndReturnTheResult() throws IllegalExpressionException {
+    public void itShouldEvaluateTheGivenExpressionWithRomeNumbersPlusOperationAndReturnTheResult() throws IllegalExpressionException, IncorrectResultValueException {
         String infixExpression = "IV + IX";
         var expressionParser  = new ExpressionParser();
         var infixToPostfixConverter = new InfixToPostfixConverter(expressionParser);
@@ -71,7 +71,7 @@ public class ApplicationTest {
     }
 
     @Test
-    public void itShouldEvaluateTheGivenExpressionWithRomeNumbersSubtractionOperationAndReturnTheResult() throws IllegalExpressionException {
+    public void itShouldEvaluateTheGivenExpressionWithRomeNumbersSubtractionOperationAndReturnTheResult() throws IllegalExpressionException, IncorrectResultValueException {
         String infixExpression = "IX - III";
         var expressionParser  = new ExpressionParser();
         var infixToPostfixConverter = new InfixToPostfixConverter(expressionParser);
@@ -83,7 +83,7 @@ public class ApplicationTest {
     }
 
     @Test
-    public void itShouldEvaluateTheGivenExpressionWithRomeNumbersMultiplicationOperationAndReturnTheResult() throws IllegalExpressionException {
+    public void itShouldEvaluateTheGivenExpressionWithRomeNumbersMultiplicationOperationAndReturnTheResult() throws IllegalExpressionException, IncorrectResultValueException {
         String infixExpression = "III * VII";
         var expressionParser  = new ExpressionParser();
         var infixToPostfixConverter = new InfixToPostfixConverter(expressionParser);
@@ -95,7 +95,7 @@ public class ApplicationTest {
     }
 
     @Test
-    public void itShouldEvaluateTheGivenExpressionWithRomeNumbersDivisionOperationAndReturnTheResult() throws IllegalExpressionException {
+    public void itShouldEvaluateTheGivenExpressionWithRomeNumbersDivisionOperationAndReturnTheResult() throws IllegalExpressionException, IncorrectResultValueException {
         String infixExpression = "X / II";
         var expressionParser  = new ExpressionParser();
         var infixToPostfixConverter = new InfixToPostfixConverter(expressionParser);
