@@ -12,8 +12,7 @@ import java.util.NoSuchElementException;
 
 import static org.junit.Assert.assertEquals;
 
-public class ApplicationTest {
-    @Test
+ @Test
     public void itShouldEvaluateTheGivenExpressionWithArabicNumbersAdditionalOperationAndReturnTheResult() throws IllegalExpressionException, IncorrectResultValueException {
         String infixExpression = "5 + 8";
         if (ExpressionParser.isValidExpr(infixExpression)) {
@@ -128,6 +127,34 @@ public class ApplicationTest {
     @Test(expected = IncorrectResultValueException.class)
     public void itShouldEvaluateTheGivenExpressionWithRomeNumbersWithNegativeNumbersAndReturnTheResult() throws IncorrectResultValueException, IllegalExpressionException {
         String infixExpression = "V - VI";
+        if (ExpressionParser.isValidExpr(infixExpression)) {
+            var expressionParser = new ExpressionParser();
+            var infixToPostfixConverter = new InfixToPostfixConverter(expressionParser);
+            var reversePolishNotation = new ReversePolishNotation();
+
+            var calculator = new Calculator(infixToPostfixConverter, reversePolishNotation);
+            Object result = calculator.calculate(infixExpression);
+            System.out.println("Your result is: " + result);
+        } else throw new IllegalExpressionException("The based expression is not valid. Try again");
+    }
+
+    @Test(expected = IllegalExpressionException.class)
+    public void getItShouldEvaluateTheGivenExpressionWithGreaterThanTwoOperandsAndReturnTheResultAndReturnTheResult() throws IncorrectResultValueException, IllegalExpressionException {
+        String infixExpression = "(5 + 6) + 7 * 7 - 4";
+        if (ExpressionParser.isValidExpr(infixExpression)) {
+            var expressionParser = new ExpressionParser();
+            var infixToPostfixConverter = new InfixToPostfixConverter(expressionParser);
+            var reversePolishNotation = new ReversePolishNotation();
+
+            var calculator = new Calculator(infixToPostfixConverter, reversePolishNotation);
+            Object result = calculator.calculate(infixExpression);
+            System.out.println("Your result is: " + result);
+        } else throw new IllegalExpressionException("The based expression is not valid. Try again");
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void itShouldEvaluateTheGivenExpressionWithInvalidRomeNumbersAndReturnTheResult() throws IncorrectResultValueException, IllegalExpressionException {
+        String infixExpression = "VIIII + IIII";
         if (ExpressionParser.isValidExpr(infixExpression)) {
             var expressionParser = new ExpressionParser();
             var infixToPostfixConverter = new InfixToPostfixConverter(expressionParser);
