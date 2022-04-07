@@ -15,8 +15,14 @@ import java.util.Map;
 
 public class ReversePolishNotation {
 
+    /**
+     * LIMIT OPERANDS AT THE EXPRESSION (WITH A MATH SIGN)
+     */
+    private static final int TOKEN_LIMIT = 3;
+
     public Integer eval(final String[] notation) throws IllegalExpressionException {
-        if (notation.length > TOKEN_LIMIT) throw new IllegalExpressionException("");
+        if (notation.length > TOKEN_LIMIT)
+            throw new IllegalExpressionException("The number of operands in an expression cannot be more than " + (TOKEN_LIMIT - 1));
         var arithmeticOperations = Map.of(
                 "/", new Division(),
                 "*", new Multiplication(),
@@ -26,7 +32,7 @@ public class ReversePolishNotation {
 
         var operands = new LinkedList<Operand<Integer>>();
         Arrays.stream(notation).forEach(token -> {
-            if (Notation.isValidRoman(token)) {
+            if (isValidRoman(token)) {
                 int i = NumerationConverter.romanToArabic(token);
                 if (i > 10 || i < 1) try {
                     throw new IllegalExpressionException("The application only works with integers from I to X");
@@ -37,7 +43,7 @@ public class ReversePolishNotation {
                     operands.push(new IntegerOperand(i));
                 }
 
-            } else if (Notation.isValidArabic(token)) {
+            } else if (isValidArabic(token)) {
                 if (Integer.parseInt(token) > 10 || Integer.parseInt(token) < 1)
                     try {
                         throw new IllegalExpressionException("The application only works with integers from 1 to 10");
@@ -57,4 +63,17 @@ public class ReversePolishNotation {
         return operands.pop().get();
     }
 
+    private static boolean isValidArabic(String token) {
+        if (token.equals("-")) return false;
+        return token.chars().filter(c -> c != '-').allMatch(Character::isDigit);
+    }
+
+    private boolean isValidRoman(String token) {
+        if (token.equals("-")) return false;
+        if (!Notation.checkRomanToken(token)) return false;
+        return token.codePoints()
+                .filter(c -> c != '-')
+                .mapToObj(operand -> (char) operand)
+                .allMatch(value -> Notation.checkRomanToken(String.valueOf(value)));
+    }
 }
