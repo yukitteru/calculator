@@ -63,7 +63,7 @@ public class ReversePolishNotation {
         return operands.pop().get();
     }
 
-    private static boolean isValidArabic(String token) {
+    private boolean isValidArabic(String token) {
         if (token.equals("-")) return false;
         return token.chars().filter(c -> c != '-').allMatch(Character::isDigit);
     }
