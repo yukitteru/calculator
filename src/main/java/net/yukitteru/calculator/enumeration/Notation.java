@@ -20,18 +20,9 @@ public enum Notation {
         return val;
     }
 
-    public static boolean isValidRoman(String token) {
+   public static boolean checkRomanToken(String token) {
         String regex = "(?<=^)M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})(?=$)";
-        boolean matches = token.matches(regex);
-        if (!matches) throw new NoSuchElementException("Incorrect Roman number");
-        return true;
-    }
-
-    public static boolean isValidArabic(String token) {
-        if (token.equals("-")) return false;
-        boolean b = token.chars().filter(c -> c != '-').allMatch(Character::isDigit);
-        if (!b) throw new NoSuchElementException("Incorrect Arabic number");
-        return true;
+        return token.matches(regex);
     }
 
 
