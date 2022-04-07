@@ -15,7 +15,8 @@ import java.util.Map;
 
 public class ReversePolishNotation {
 
-    public Integer eval(final String[] notation) {
+    public Integer eval(final String[] notation) throws IllegalExpressionException {
+        if (notation.length > TOKEN_LIMIT) throw new IllegalExpressionException("");
         var arithmeticOperations = Map.of(
                 "/", new Division(),
                 "*", new Multiplication(),
@@ -25,17 +26,18 @@ public class ReversePolishNotation {
 
         var operands = new LinkedList<Operand<Integer>>();
         Arrays.stream(notation).forEach(token -> {
-            if (isRomeNumber(token)) {
+            if (Notation.isValidRoman(token)) {
                 int i = NumerationConverter.romanToArabic(token);
                 if (i > 10 || i < 1) try {
                     throw new IllegalExpressionException("The application only works with integers from I to X");
                 } catch (IllegalExpressionException e) {
                     e.printStackTrace();
-                } else {
+                }
+                else {
                     operands.push(new IntegerOperand(i));
                 }
 
-            } else if (isArabicNumber(token)) {
+            } else if (Notation.isValidArabic(token)) {
                 if (Integer.parseInt(token) > 10 || Integer.parseInt(token) < 1)
                     try {
                         throw new IllegalExpressionException("The application only works with integers from 1 to 10");
@@ -53,20 +55,6 @@ public class ReversePolishNotation {
             }
         });
         return operands.pop().get();
-    }
-
-    private boolean isRomeNumber(String token) {
-        if (token.equals("-")) return false;
-        return token.codePoints()
-                .filter(c -> c != '-')
-                .mapToObj(operand -> (char) operand)
-                .allMatch(value -> Notation.isValidRoman(String.valueOf(value)));
-    }
-
-    private boolean isArabicNumber(String token) {
-        if (token.equals("-")) return false;
-        return token.codePoints().filter(c -> c != '-').allMatch(Character::isDigit);
-
     }
 
 }
