@@ -12,7 +12,9 @@ import java.util.NoSuchElementException;
 
 import static org.junit.Assert.assertEquals;
 
- @Test
+public class ApplicationTest {
+
+    @Test
     public void itShouldEvaluateTheGivenExpressionWithArabicNumbersAdditionalOperationAndReturnTheResult() throws IllegalExpressionException, IncorrectResultValueException {
         String infixExpression = "5 + 8";
         if (ExpressionParser.isValidExpr(infixExpression)) {
